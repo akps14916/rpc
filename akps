@@ -58,3 +58,50 @@ except Exception as e:
 (How to run)
 1st terminal --> python server.py
 2nd terminal --> python client.py
+
+
+
+
+
+Remote Procedure Call (RPC) – Theory
+🔸 Definition
+
+Remote Procedure Call (RPC) is a communication mechanism that allows a program to execute a procedure on a remote system as if it were a local function call.
+
+🔸 Basic Idea
+
+👉 Client calls a function
+👉 Function actually runs on server
+👉 Result is returned to client
+
+🔸 Architecture
+6
+🔸 Components
+Client – initiates request
+Client Stub – acts as proxy for remote procedure
+Server Stub – receives request and forwards to server
+Server – executes procedure
+RPC Runtime – handles communication
+
+🔸 Working (Steps)
+Client calls local stub
+Stub converts data into message (marshalling)
+Message sent over network
+Server stub receives and converts back (unmarshalling)
+Server executes function
+Result sent back to client
+🔸 Features
+
+Makes remote calls look like local calls
+Hides network complexity
+Supports distributed systems
+🔸 Advantages
+
+✔ Simplifies distributed programming
+✔ Easy to use
+✔ Language-independent (in many implementations)
+🔸 Disadvantages
+
+❌ Network latency
+❌ Failure handling is complex
+❌ Debugging is difficult
