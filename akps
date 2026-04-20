@@ -1,0 +1,60 @@
+#(SERVER)
+from xmlrpc.server import SimpleXMLRPCServer
+
+def calculate(operation, a, b):
+    if operation == "add":
+        return a + b
+    elif operation == "subtract":
+        return a - b
+    elif operation == "multiply":
+        return a * b
+    elif operation == "divide":
+        if b == 0:
+            return "Error: Division by zero"
+        return a / b
+    elif operation == "max":
+        return max(a, b)
+    else:
+        return "Invalid operation"
+
+server = SimpleXMLRPCServer(("localhost", 8000))
+print("RPC Server started on port 8000...")
+
+server.register_function(calculate, "calculate")
+
+server.serve_forever()
+
+
+
+
+
+
+#(CLIENT)
+import xmlrpc.client
+
+try:
+    proxy = xmlrpc.client.ServerProxy("http://localhost:8000/")
+
+    # 🔹 Connection test (important)
+    print("Connected to RPC Server successfully!\n")
+
+    # Predefined values (no input)
+    a, b = 10, 5
+
+    print("Add:", proxy.calculate("add", a, b))
+    print("Subtract:", proxy.calculate("subtract", a, b))
+    print("Multiply:", proxy.calculate("multiply", a, b))
+    print("Divide:", proxy.calculate("divide", a, b))
+    print("Max:", proxy.calculate("max", a, b))
+
+except Exception as e:
+    print("Connection failed:", e)
+
+
+
+
+
+
+(How to run)
+1st terminal --> python server.py
+2nd terminal --> python client.py
